@@ -2,5 +2,8 @@ using UnityEngine;
 
 public class ValueLine : MonoBehaviour
 {
-    [SerializeField] public short _value { get; set; }
+    [SerializeField] private short _value;
+
+    public void SetValue(short value) => _value = value;
+    public short GetValue() => _value;
 }

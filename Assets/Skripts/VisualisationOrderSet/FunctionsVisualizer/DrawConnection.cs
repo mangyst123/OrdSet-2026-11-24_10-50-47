@@ -36,7 +36,7 @@ public class DrawConnection : MonoBehaviour
 
     public LineRenderer DrawLineInTwoNodes(
         (string, string) namesTwoNode, (Transform, Transform) transformTwoNode, 
-        bool isFirstSmalletSecond) {
+        bool isFirstSmalletSecond, short value) {
 
         string nameLine;
         if (isFirstSmalletSecond)
@@ -45,6 +45,8 @@ public class DrawConnection : MonoBehaviour
             nameLine = namesTwoNode.Item2 + '|' + namesTwoNode.Item1;
 
         GameObject newLine = DrawLine(new Vector3(0, 0, 0), nameLine);
+
+        newLine.GetComponent<ValueLine>().SetValue(value);
 
         LineRenderer lr = SetStartAndEndLine(transformTwoNode, newLine);
 

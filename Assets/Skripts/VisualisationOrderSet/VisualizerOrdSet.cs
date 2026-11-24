@@ -100,13 +100,13 @@ public class VisualizerOrdSet : MonoBehaviour {
                         (_firstPointCoordinat, _firstPointCoordinat));
     
     private LineRenderer DrawPairConnection(
-        (GameObject, GameObject) pairNodeInGame) =>
+        (GameObject, GameObject) pairNodeInGame, short value) =>
         /// Отписовывает на поле связь между 2-я узлами
         /// возвращает сслыку на их связь
         GetComponent<DrawConnection>().DrawLineInTwoNodes(
             (pairNodeInGame.Item1.name, pairNodeInGame.Item2.name),
             (pairNodeInGame.Item1.transform, pairNodeInGame.Item2.transform), 
-            isFirstSmalletSecond);
+            isFirstSmalletSecond, value);
 
     private void SetParentsAndChildran(
         (GameObject, GameObject) pairNodeInGame) =>
@@ -140,7 +140,7 @@ public class VisualizerOrdSet : MonoBehaviour {
                     (GameObject, GameObject) pairNodeInGame = DrawPairNodes((row,coln));
                     isFirstSmalletSecond = IsFirstSmalletSecond((row, coln));
                     SetParentsAndChildran(pairNodeInGame);
-                    _lineRenderers.Add(DrawPairConnection(pairNodeInGame));
+                    _lineRenderers.Add(DrawPairConnection(pairNodeInGame, _ordSet.GetMatrix()[row][coln]));
 
                     SetConectionInList(pairNodeInGame);
 
