@@ -1,0 +1,54 @@
+<orderpaits>
+	
+	<!-- Количество элементов во множестве -->
+	<CountOrderSet type ="int"> 8 </CountOrderSet>
+	
+	<!-- Это список упорядоченных пар, левый элемент/верхний меньше правого/нижнего-->
+	
+	<Pair>
+		<inf type = "string"> A </inf>
+		<sup type = "string"> B </sup>
+		<val type = "short"> 5 </val>
+	</Pair>
+	<Pair>
+		<inf type = "string"> A </inf>
+		<sup type = "string"> C </sup>
+		<val type = "short"> 1 </val>
+	</Pair>
+	<Pair>
+		<inf type = "string"> A </inf>
+		<sup type = "string"> D </sup>
+		<val type = "short"> 6 </val>
+	</Pair>
+
+	<Pair>
+		<inf type = "string"> E</inf>
+		<sup type = "string"> D </sup>
+		<val type = "short"> 4 </val>
+	</Pair>
+
+	<Pair>
+		<inf type = "string"> F </inf>
+		<sup type = "string"> G </sup>
+		<val type = "short"> 2 </val>
+	</Pair>
+
+	<Pair>
+		<inf type = "string"> C </inf>
+		<sup type = "string"> G </sup>
+		<val type = "short"> 3 </val>
+	</Pair>
+
+	<Pair>
+		<inf type = "string"> G </inf>
+		<sup type = "string"> K </sup>
+		<val type = "short"> 4 </val>
+	</Pair>
+
+	<Pair>
+		<inf type = "string"> D </inf>
+		<sup type = "string"> K </sup>
+		<val type = "short"> 7 </val>
+	</Pair>
+	
+</orderpaits>

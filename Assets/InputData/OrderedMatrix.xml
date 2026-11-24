@@ -1,0 +1,20 @@
+<ordermatrix rows="3" colns="3">
+	<!-- Количество элементов во множестве определяем по количеству заголовков -->
+	<!-- Названия элементов у-множества-->
+	<headers>
+		<coln>A</coln>
+		<coln>B</coln>
+		<coln>C</coln>
+	</headers>
+	<!-- Сама матрица -->
+	<!-- Под главной диагональю задавать значения не обязательно они игнорируются программой-->
+	<row>
+		<coln>0</coln> <coln>1</coln> <coln>0</coln>
+	</row>
+	<row>
+		<coln>-1</coln><coln>0</coln><coln>1</coln>
+	</row>
+	<row>
+		<coln>0</coln><coln>-1</coln><coln>0</coln>
+	</row>
+</ordermatrix>
