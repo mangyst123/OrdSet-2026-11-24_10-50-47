@@ -25,4 +25,7 @@ public class ParentsAndChildrens : MonoBehaviour {
 
     public void AddParents(GameObject parent) => _pointsParents.Add(parent);
     public void AddChildren(GameObject child) => _pointsChildrens.Add(child);
+
+    public void DelateParent(GameObject parent) => _pointsParents.Remove(parent);
+    public void DelateChildran(GameObject childran) => _pointsChildrens.Remove(childran);
 }
