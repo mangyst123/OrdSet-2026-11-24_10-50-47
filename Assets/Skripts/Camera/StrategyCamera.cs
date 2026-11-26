@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class StrategyCamera : MonoBehaviour {
     [Header("Настройки движения (WASD)")]
     public float moveSpeed = 20f;
-    public Vector2 mapBounds = new Vector2(50f, 50f);
+    public Vector2 mapBounds = new(50f, 50f);
 
     [Header("Настройки перетаскивания (ПКМ)")]
     public float dragSpeed = 0.05f; // Скорость перетаскивания (обычно маленькая, т.к. дельта в пикселях)
@@ -18,7 +18,6 @@ public class StrategyCamera : MonoBehaviour {
     private Vector2 moveInput;
     private float zoomInput;
     private Vector2 dragDelta;
-    private bool isDragging;
 
     void Awake() {
         controls = new CameraControls();
@@ -33,45 +32,43 @@ public class StrategyCamera : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        // 1. Считываем все значения
-        moveInput = controls.Player.Move.ReadValue<Vector2>();
-        zoomInput = controls.Player.Zoom.ReadValue<float>();
-        dragDelta = controls.Player.DragDelta.ReadValue<Vector2>();
-
-        // Проверяем, зажата ли правая кнопка мыши
-        isDragging = controls.Player.RightClick.IsPressed();
-
         if (controls.Player.Move.IsPressed()) 
             MoveCamera();
         if (controls.Player.Zoom.IsPressed())
             HandleZoom();
-        if (isDragging) 
+
+        // Проверяем, зажата ли правая кнопка мыши
+        if (controls.Player.RightClick.IsPressed()) 
             HandleDrag();
         
     }
 
     void MoveCamera() {
+        // Считываем позицию камеры
+        moveInput = controls.Player.Move.ReadValue<Vector2>();
+
+        // Переводим ее в новую позицию
         Vector3 direction = new Vector3(moveInput.x, moveInput.y, 0);
         transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
-        //ClampPosition();
     }
 
     void HandleDrag() {
-        if (isDragging) {
-            // Важный момент: чтобы карта двигалась "за мышкой", 
-            // камеру нужно двигать в ПРОТИВОПОЛОЖНУЮ сторону от движения мыши.
-            // Поэтому ставим минус перед dragDelta.
-            Vector3 dragDirection = new Vector3(-dragDelta.x, -dragDelta.y, 0);
+        // Важный момент: чтобы карта двигалась "за мышкой", 
+        // камеру нужно двигать в ПРОТИВОПОЛОЖНУЮ сторону от движения мыши.
+        // Поэтому ставим минус перед dragDelta.
+        dragDelta = controls.Player.DragDelta.ReadValue<Vector2>();
+        Vector3 dragDirection = new Vector3(-dragDelta.x, -dragDelta.y, 0);
 
-            // Здесь Time.deltaTime обычно не нужен, так как Delta уже зависит от частоты кадров,
-            // но dragSpeed помогает настроить чувствительность.
-            transform.Translate(dragDirection * dragSpeed, Space.World);
+        // Здесь Time.deltaTime обычно не нужен, так как Delta уже зависит от частоты кадров,
+        // но dragSpeed помогает настроить чувствительность.
+        transform.Translate(dragDirection * dragSpeed, Space.World);
 
-            //ClampPosition();
-        }
+        //ClampPosition();
+    
     }
 
     void HandleZoom() {
+        zoomInput = controls.Player.Zoom.ReadValue<float>();
         if (zoomInput != 0) {
             Camera cam = GetComponent<Camera>();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+
 public class VisualizerOrdSet : MonoBehaviour {
 
     [SerializeField] private string _filePath =
@@ -14,6 +15,7 @@ public class VisualizerOrdSet : MonoBehaviour {
     [SerializeField] private Vector3 _firstPointCoordinat = new(0, 0, 0);
     [SerializeField] private bool _parseFileOrGenerate = true;
     [SerializeField] private ushort _orderGenerateLattec = 5;
+    [SerializeField] private GameObject _createCanvasOneNode = null;
 
     private OrderSetInMatrix _ordSet = new();
     // Все связи которые есть, надо для обновления линий
@@ -22,8 +24,20 @@ public class VisualizerOrdSet : MonoBehaviour {
     private List<LineRenderer> _lineRenderers = new ();
     private bool isFirstSmalletSecond;
     private InstallNodeInLayer _layerVusualayzer;
+    private GreedControler _keyComands;
 
-    private void Start()
+    void Awake() {
+        _keyComands = new GreedControler();
+    }
+    void OnEnable() {
+        _keyComands.Player.Enable();
+    }
+
+    void OnDisable() {
+        _keyComands.Player.Disable();
+    }
+
+    void Start()
     {
         if (_parseFileOrGenerate)
             ParseFile();
@@ -38,8 +52,15 @@ public class VisualizerOrdSet : MonoBehaviour {
         // Для красоты
         StartCoroutine(SpawnPointsRoutine());
     }
-    private void Update() {
+    void Update() {
         if (_connections.Count == 0) return;
+
+        
+        if (_keyComands.Player.CreateNewNode.WasPressedThisFrame()) {
+            Debug.Log("Нажата кнопка");
+            _createCanvasOneNode.SetActive(!_createCanvasOneNode.activeSelf);
+        }
+
 
         // Каждый раз обновляем позицию связей
         for (int k = 0; k < _connections.Count; k++) {
@@ -51,6 +72,14 @@ public class VisualizerOrdSet : MonoBehaviour {
         }
     }
 
+    public void AddNewZeroNode(string name) {
+        bool isCreateNewObject = AddNodeInMatrix.AddOneNodeInMatrix(
+                _ordSet.GetMatrix(), _ordSet.GetNamesElements(), name);
+        if (isCreateNewObject)
+            gameObject.GetComponent<DrawPairNode>().CreateNewNode(_firstPointCoordinat, name);
+        else
+            Debug.Log("Новый обьект не появился, он уже есть на поле...");
+    }
     private void CreateOrderSet() {
         short[][] matrix;
         List<string> nameList;

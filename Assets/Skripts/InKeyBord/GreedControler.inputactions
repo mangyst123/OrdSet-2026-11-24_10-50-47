@@ -1,0 +1,36 @@
+{
+    "version": 1,
+    "name": "GreedControler",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "337e5118-084c-456e-bac0-f423b4fea396",
+            "actions": [
+                {
+                    "name": "CreateNewNode",
+                    "type": "Button",
+                    "id": "99330874-c7ba-4914-ac44-734971f9db79",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "96eb9eab-f9e2-40b8-810d-aef7f6d7f39c",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CreateNewNode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -8,7 +8,7 @@ public class DrawPairNode : MonoBehaviour
     // Базовая точка, которая будет копироваться
     [SerializeField] private GameObject _baseNode = null;
 
-    private GameObject CreateNewNode(Vector3 position, string name) {
+    public GameObject CreateNewNode(Vector3 position, string name) {
         GameObject newNode = Instantiate(_baseNode, position, Quaternion.identity);
         newNode.name = name;
         return newNode;
